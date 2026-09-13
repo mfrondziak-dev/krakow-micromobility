@@ -1,5 +1,3 @@
-{{ config(location='data/silver/fct_vehicle_trips') }}
-
 -- Reconstructed rides for dockless vehicles.
 --
 -- Scooters report GPS continuously while riding, so a single ride appears
@@ -8,10 +6,13 @@
 -- consecutive observations whose displacement exceeds the GPS-jitter
 -- threshold belong to the same trip; a stationary observation starts a
 -- new group. Each group with net displacement above the trip threshold
--- is one reconstructed ride.
+-- AND a physically plausible average speed is one reconstructed ride.
+-- The speed filter removes slow GPS-drift chains (vehicles inching around
+-- a parking spot) that would otherwise masquerade as very long rides.
 
 {% set jitter_m = 15 %}
 {% set min_trip_m = 50 %}
+{% set min_speed_kmh = 1.0 %}
 
 with observations as (
 
@@ -99,3 +100,7 @@ select
     {{ haversine_m('start_lat', 'start_lon', 'end_lat', 'end_lon') }} as distance_m
 from grouped
 where {{ haversine_m('start_lat', 'start_lon', 'end_lat', 'end_lon') }} > {{ min_trip_m }}
+  and date_diff('minute', departed_at, arrived_at) > 0
+  and {{ haversine_m('start_lat', 'start_lon', 'end_lat', 'end_lon') }}
+      / (date_diff('minute', departed_at, arrived_at) / 60.0)
+      >= {{ min_speed_kmh }} * 1000
