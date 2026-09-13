@@ -1,0 +1,16 @@
+[project]
+name = "krakow-micromobility-app"
+version = "1.0.0"
+description = "Interactive dashboard for the Kraków GBFS micromobility pipeline"
+requires-python = ">=3.13"
+dependencies = [
+    "duckdb>=1.1",
+    "folium>=0.18",
+    "plotly>=5.24",
+    "polars>=1.9",
+    "streamlit>=1.39",
+    "streamlit-folium>=0.23",
+]
+
+[tool.uv]
+package = false

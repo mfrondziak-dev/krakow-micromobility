@@ -1,0 +1,12 @@
+requests>=2.32
+polars>=1.9
+duckdb>=1.1
+matplotlib>=3.8
+pandas>=2.2
+jupyterlab>=4.2
+streamlit>=1.39
+folium>=0.18
+plotly>=5.24
+streamlit-folium>=0.23
+dbt-core>=1.8
+dbt-duckdb>=1.8

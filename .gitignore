@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# dbt
+dbt-project/target/
+dbt-project/logs/
+dbt-project/dbt_packages/
+dbt-project/.user.yml
+
+# Data artifacts (keep folder structure, not the data)
+dbt-project/data/raw/gbfs/*
+!dbt-project/data/raw/gbfs/**/.gitkeep
+dbt-project/data/bronze/*
+!dbt-project/data/bronze/.gitkeep
+dbt-project/data/silver/*
+!dbt-project/data/silver/.gitkeep
+dbt-project/data/gold/*
+!dbt-project/data/gold/.gitkeep
+dbt-project/data/tmp/
+dbt-project/*.duckdb
+dbt-project/*.duckdb.wal
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

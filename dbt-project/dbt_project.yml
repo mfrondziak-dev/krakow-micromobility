@@ -1,0 +1,19 @@
+name: krakow_micromobility
+version: "1.0.0"
+config-version: 2
+
+profile: krakow
+
+model-paths: ["models"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  krakow_micromobility:
+    +materialized: external
+    +format: parquet
+    01_bronze:
+      +schema: bronze
+    02_silver:
+      +schema: silver
+    03_gold:
+      +schema: gold

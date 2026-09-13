@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: bronze_station_status
+    description: "Raw GBFS station_status polls, one row per station per poll."
+    columns:
+      - name: station_id
+        tests: [not_null]
+      - name: reported_at_local
+        tests: [not_null]
+
+  - name: bronze_vehicle_status
+    description: "Raw GBFS free_bike_status polls, one row per vehicle per poll."
+    columns:
+      - name: vehicle_id
+        tests: [not_null]
+
+  - name: dim_stations
+    description: "One row per parking hub with latest known attributes."
+    columns:
+      - name: station_id
+        tests: [not_null, unique]
+
+  - name: fct_vehicle_trips
+    description: "Reconstructed rides from consecutive vehicle positions."
+    columns:
+      - name: vehicle_id
+        tests: [not_null]
+      - name: departed_at
+        tests: [not_null]
+
+  - name: mart_trips_enriched
+    description: "Trips with duration, distance, speed and operator pricing."
+
+  - name: mart_station_utilization_hourly
+    description: "Hourly availability and service status per station."
+
+  - name: mart_fleet_health_hourly
+    description: "Hourly battery, range and availability stats per vehicle type."
+
+  - name: mart_station_od_flows_hourly
+    description: "Origin-destination flows between parking hubs per hour."

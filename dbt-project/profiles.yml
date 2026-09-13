@@ -1,0 +1,10 @@
+krakow:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: krakow.duckdb
+      threads: 4
+      settings:
+        memory_limit: 8GB
+        temp_directory: data/tmp
