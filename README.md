@@ -82,7 +82,7 @@ krakow-micromobility/
 **Requirements:** Python 3.13+, [uv](https://docs.astral.sh/uv/), Git. ~8 GB RAM.
 
 ```bash
-git clone <REPO_URL>
+git clone https://github.com/mfrondziak-dev/krakow-micromobility
 cd krakow-micromobility
 
 # 1. Install dbt with the DuckDB adapter
